@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111111">
+    <title>Tienda | CALLE TUNING</title>
+
+    <link rel="stylesheet" href="/css/tienda.css">
+    <script src="/js/tienda.js" defer></script>
+</head>
+
+<body>
+    <header class="encabezado">
+        <a class="marca" href="/tienda.html" aria-label="CALLE TUNING - Inicio">
+            <span class="marca-icono">CT</span>
+            <span>CALLE <strong>TUNING</strong></span>
+        </a>
+
+        <nav class="navegacion">
+            <a href="#inicio">Inicio</a>
+            <a href="#catalogo">Productos</a>
+        </nav>
+
+        <button id="btnCarrito" class="boton-carrito" type="button" aria-label="Ver carrito"
+            aria-controls="panelCarrito">
+            <span aria-hidden="true">🛒</span>
+            <span>Mi carrito</span>
+            <span id="contadorCarrito" class="contador">0</span>
+        </button>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-contenido">
+                <span class="etiqueta">TU MOTO, TU ESTILO</span>
+                <h1>Haz que tu moto<br>hable por ti.</h1>
+                <p>
+                    Explora los productos disponibles de CALLE TUNING
+                    y encuentra lo que necesitas para personalizar y
+                    proteger tu motocicleta.
+                </p>
+                <a href="#catalogo" class="boton-principal">
+                    Explorar productos
+                </a>
+            </div>
+
+            <div class="hero-decoracion" aria-hidden="true">
+                <span class="hero-simbolo">CT</span>
+                <span class="hero-texto">PERSONALIZA · PROTEGE · DESTACA</span>
+            </div>
+        </section>
+
+        <section id="catalogo" class="seccion-catalogo">
+            <div class="encabezado-seccion">
+                <div>
+                    <span class="etiqueta">NUESTRO CATÁLOGO</span>
+                    <h2>Productos destacados</h2>
+                    <p>Consulta los productos registrados en nuestro inventario.</p>
+                </div>
+                <span id="totalProductos" class="total-productos">
+                    Cargando productos...
+                </span>
+            </div>
+
+            <div class="barra-filtros">
+                <label class="buscador">
+                    <span aria-hidden="true">⌕</span>
+                    <input id="buscarProducto" type="search" placeholder="Buscar por nombre o descripción..."
+                        autocomplete="off">
+                </label>
+
+                <label class="filtro-categoria">
+                    <span class="texto-filtro">Categoría</span>
+                    <select id="filtroCategoria">
+                        <option value="">Todas las categorías</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="estadoCatalogo" class="estado-catalogo" role="status">
+                Cargando catálogo...
+            </div>
+
+            <div id="catalogoProductos" class="rejilla-productos"></div>
+        </section>
+    </main>
+
+    <div id="fondoCarrito" class="fondo-carrito" hidden></div>
+
+    <aside id="panelCarrito" class="panel-carrito" aria-label="Carrito de compras" aria-hidden="true">
+        <div class="carrito-encabezado">
+            <div>
+                <span class="etiqueta">TU SELECCIÓN</span>
+                <h2>Mi carrito</h2>
+            </div>
+            <button id="cerrarCarrito" class="boton-cerrar" type="button" aria-label="Cerrar carrito">×</button>
+        </div>
+
+        <div id="listaCarrito" class="lista-carrito">
+            <p class="carrito-vacio">Todavía no has agregado productos.</p>
+        </div>
+
+        <div class="carrito-pie">
+            <div class="fila-total">
+                <span>Subtotal</span>
+                <strong id="subtotalCarrito">S/ 0.00</strong>
+            </div>
+            <p class="nota-carrito">
+                El subtotal es referencial. La compra todavía no se ha confirmado.
+            </p>
+            <button id="btnContinuarCompra" class="boton-principal boton-ancho" type="button" disabled>
+                Continuar
+            </button>
+            <p id="mensajeCarrito" class="mensaje-carrito" role="status"></p>
+        </div>
+    </aside>
+
+    <footer class="pie-pagina">
+        <a class="marca marca-pie" href="/tienda.html">
+            <span class="marca-icono">CT</span>
+            <span>CALLE <strong>TUNING</strong></span>
+        </a>
+        <p>Personaliza. Protege. Destaca.</p>
+        <span>© <span id="anioActual"></span> CALLE TUNING</span>
+    </footer>
+</body>
+
+</html>

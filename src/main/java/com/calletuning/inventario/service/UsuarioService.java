@@ -3,18 +3,25 @@ package com.calletuning.inventario.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.calletuning.inventario.entity.Usuario;
 import com.calletuning.inventario.repository.UsuarioRepository;
 
 @Service
+@Transactional
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(
+            UsuarioRepository usuarioRepository,
+            PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<Usuario> listar() {
@@ -26,6 +33,15 @@ public class UsuarioService {
     }
 
     public Usuario guardar(Usuario usuario) {
+        if (usuario.getPassword() == null
+                || usuario.getPassword().isBlank()) {
+            throw new IllegalArgumentException(
+                    "La contraseña es obligatoria");
+        }
+
+        usuario.setPassword(
+                passwordEncoder.encode(usuario.getPassword()));
+
         return usuarioRepository.save(usuario);
     }
 
@@ -36,9 +52,14 @@ public class UsuarioService {
         existente.setNombre(usuario.getNombre());
         existente.setApellido(usuario.getApellido());
         existente.setUsername(usuario.getUsername());
-        existente.setPassword(usuario.getPassword());
         existente.setEstado(usuario.getEstado());
         existente.setRol(usuario.getRol());
+
+        if (usuario.getPassword() != null
+                && !usuario.getPassword().isBlank()) {
+            existente.setPassword(
+                    passwordEncoder.encode(usuario.getPassword()));
+        }
 
         return usuarioRepository.save(existente);
     }
